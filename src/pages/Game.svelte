@@ -2,7 +2,14 @@
   import Header from "../components/Header.svelte";
   import { onMount } from "svelte";
   import { initializeApp } from "firebase/app";
-  import { getDatabase, ref, onValue } from "firebase/database";
+  import {
+    getDatabase,
+    ref,
+    onValue,
+    push,
+    query,
+    orderByChild,
+  } from "firebase/database";
   import { getAuth } from "firebase/auth";
 
   const firebaseConfig = {
@@ -33,8 +40,11 @@
   let gameTitles = [];
   let selectedGameId = null;
   let timerInterval;
+  let startTime;
+  let rankings = [];
 
   function startTimer() {
+    startTime = Date.now();
     timerInterval = setInterval(() => {
       if (timeLeft > 0) {
         timeLeft -= 1;
@@ -48,11 +58,42 @@
   function endGame() {
     gameOver = true;
     alert(`시간초과로 게임이 종료되었습니다.`);
+    saveRanking(false);
   }
 
   function GameClear() {
     gameOver = true;
     alert(`게임클리어~! 축하드립니다~`);
+    clearInterval(timerInterval);
+    saveRanking(true);
+  }
+
+  function saveRanking(isCleared) {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user && isCleared) {
+      const elapsedTime = Date.now() - startTime;
+      const rankingRef = ref(database, `rankings/${gameId}`);
+      push(rankingRef, {
+        email: user.email,
+        time: elapsedTime,
+      });
+    }
+  }
+
+  function fetchRankings() {
+    if (!selectedGameId) return;
+    const rankingRef = query(
+      ref(database, `rankings/${selectedGameId}`),
+      orderByChild("time")
+    );
+    onValue(rankingRef, (snapshot) => {
+      rankings = [];
+      snapshot.forEach((childSnapshot) => {
+        rankings.push(childSnapshot.val());
+      });
+      rankings = rankings.slice(0, 10); // 상위 10명만 표시
+    });
   }
 
   async function generateRandomGrid(rows, cols) {
@@ -146,7 +187,7 @@
           description = data.description || "No description.";
           wordList = data.words || [];
           await generateRandomGrid(10, 10);
-          startTimer();
+          fetchRankings();
         }
       },
       (error) => {
@@ -179,6 +220,7 @@
   function handleStartGame() {
     if (selectedGameId) {
       loadGameData();
+      startTimer();
     } else {
       alert("게임을 선택하세요!");
     }
@@ -209,12 +251,6 @@
       wordList = wordList.filter((word) => word !== selectedWord);
       score += 1;
       selectedCells = []; // 맞춘 단어는 선택 초기화
-    } else {
-      selectedCells.forEach((cell) => (cell.wrong = true));
-      setTimeout(
-        () => selectedCells.forEach((cell) => (cell.wrong = false)),
-        500
-      );
     }
 
     if (wordList.length === 0) {
@@ -235,10 +271,6 @@
       {/each}
     </select>
     <button class="game-start-btn" on:click={handleStartGame}>게임 시작</button>
-  </div>
-  <div>
-    *렉최소화작업으로 인해 비동기 처리되어 있습니다. 게임칸이 다 찰때까지
-    게임시작버튼을 눌러주세요*
   </div>
 
   <div class="game-info">
@@ -276,16 +308,6 @@
                 (selected) =>
                   selected.row === rowIndex && selected.col === colIndex
               )}
-              class:wrong={selectedCells.some(
-                (selected) =>
-                  selected.row === rowIndex &&
-                  selected.col === colIndex &&
-                  selected.wrong
-              )}
-              class:clicked={selectedCells.some(
-                (selected) =>
-                  selected.row === rowIndex && selected.col === colIndex
-              )}
             >
               {cell}
             </div>
@@ -293,18 +315,21 @@
         </div>
       {/each}
     </div>
-
-    <div class="word-list">
-      <h3>Words to Find:</h3>
+    <div>
+      <div class="word-list">
+        <h3>Words List :</h3>
+        <ul>
+          {#each wordList as word}
+            <li class:found={foundWords.includes(word)}>{word}</li>
+          {/each}
+        </ul>
+      </div>
+    </div>
+    <div class="rankings">
+      <h3>Top 10 Rankings</h3>
       <ul>
-        {#each wordList as word}
-          <li>{word}</li>
-        {/each}
-      </ul>
-      <h3>Found Words:</h3>
-      <ul>
-        {#each foundWords as word}
-          <li>{word}</li>
+        {#each rankings as rank}
+          <li>{rank.email}: {Math.floor(rank.time / 1000)}초</li>
         {/each}
       </ul>
     </div>
