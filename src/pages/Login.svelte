@@ -4,14 +4,7 @@
   import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyAqEGY7SClDIBIEFuKEDIWXsGWdPyNyha4",
-    authDomain: "wsm-clone-ad6b5.firebaseapp.com",
-    projectId: "wsm-clone-ad6b5",
-    storageBucket: "wsm-clone-ad6b5.appspot.com",
-    messagingSenderId: "826732808522",
-    appId: "1:826732808522:web:45189193293d8ce5e819b3",
-    databaseURL:
-      "https://wsm-clone-ad6b5-default-rtdb.asia-southeast1.firebasedatabase.app/",
+
   };
 
   const app = initializeApp(firebaseConfig);
