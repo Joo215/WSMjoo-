@@ -1,0 +1,32 @@
+.main-title {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.main-subtitle {
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.game-start-btn {
+  padding: 10px 15px 10px 15px;
+  border: 2px solid black;
+  color: white;
+  background-color: blue;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.game-maker-btn {
+  padding: 10px 15px 10px 15px;
+  border: 2px solid black;
+  color: white;
+  background-color: tomato;
+  font-size: 15px;
+  cursor: pointer;
+}

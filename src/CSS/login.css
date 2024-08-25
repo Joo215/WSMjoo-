@@ -1,0 +1,41 @@
+.login {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+  border: 1px solid gray;
+  padding: 10px 150px 10px 150px;
+}
+
+.login-title {
+  margin: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  border: 1px solid gray;
+  padding: 10px 200px 10px 200px;
+}
+
+.loginsubmit-btn {
+  background-color: salmon;
+  padding: 10px;
+  margin: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.input-text {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.login-label {
+  padding-bottom: 5px;
+}

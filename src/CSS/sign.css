@@ -1,0 +1,41 @@
+.signup {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+  border: 1px solid gray;
+  padding: 10px 165px 10px 165px;
+}
+
+.signup-title {
+  margin: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  border: 1px solid gray;
+  padding: 10px 200px 10px 200px;
+}
+
+.signsubmit-btn {
+  background-color: salmon;
+  padding: 10px;
+  margin: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.input-text {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.signup-label {
+  padding-bottom: 5px;
+}
