@@ -13,6 +13,8 @@
   import { onMount } from "svelte";
   import { user$ } from "./store";
   import Loading from "./pages/Loading.svelte";
+  import Game from "./pages/Game.svelte";
+  import Maker from "./pages/Maker.svelte";
 
   let isLoading = true;
 
@@ -31,6 +33,8 @@
     "/": Main,
     "/login": Login,
     "/sign": Sign,
+    "/game": Game,
+    "/maker": Maker,
     "*": NotFound,
   };
   // onMount(() => checkLogin());

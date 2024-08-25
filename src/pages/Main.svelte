@@ -15,6 +15,14 @@
       }
     });
   });
+
+  const handleGame = () => {
+    window.location.hash = "/game";
+  };
+
+  const handleMaker = () => {
+    window.location.hash = "/maker";
+  };
 </script>
 
 <Header location="home" />
@@ -23,16 +31,11 @@
   <div class="main-title">Welcome to Word Search Game</div>
   <div class="main-subtitle">Team Part 01</div>
 
+  <!-- 로그인이 되어있을 경우에만 버튼 두가지 띄움 -->
   {#if isLoggedIn}
     <div class="buttons">
-      <button
-        on:click={() => (window.location.hash = "/game-start")}
-        class="game-start-btn">게임 시작</button
-      >
-      <button
-        on:click={() => (window.location.hash = "/game-maker")}
-        class="game-maker-btn">게임 메이커</button
-      >
+      <button on:click={handleGame} class="game-start-btn">게임 시작</button>
+      <button on:click={handleMaker} class="game-maker-btn">게임 메이커</button>
     </div>
   {/if}
 </main>

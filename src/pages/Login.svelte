@@ -10,6 +10,8 @@
     storageBucket: "wsm-clone-ad6b5.appspot.com",
     messagingSenderId: "826732808522",
     appId: "1:826732808522:web:45189193293d8ce5e819b3",
+    databaseURL:
+      "https://wsm-clone-ad6b5-default-rtdb.asia-southeast1.firebasedatabase.app/",
   };
 
   const app = initializeApp(firebaseConfig);
