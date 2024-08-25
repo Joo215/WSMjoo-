@@ -1,33 +1,22 @@
 .game-selection {
+  display: flex;
+  align-items: center;
   margin-bottom: 1rem;
 }
 
-.game-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #333;
+.game-selection label {
+  margin-right: 1rem;
 }
 
-.game-description {
-  margin-top: 1rem;
-}
-
-.game-description__label {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #555;
-}
-
-.game-description__info {
+.game-selection button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  line-height: 1.5;
-  color: #666;
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.game-info {
+  margin-bottom: 1rem;
 }
 
 .game-title {
@@ -60,6 +49,12 @@
   margin-bottom: 1.5rem;
 }
 
+.timer,
+.score {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
 .game-container {
   display: flex;
   justify-content: flex-start;
@@ -87,6 +82,8 @@
   background-color: #fff;
   font-size: 1.2rem;
   font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .word-list {

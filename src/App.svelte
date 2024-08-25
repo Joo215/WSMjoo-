@@ -15,6 +15,8 @@
   import Loading from "./pages/Loading.svelte";
   import Game from "./pages/Game.svelte";
   import Maker from "./pages/Maker.svelte";
+  import WordList from "./pages/WordList.svelte";
+  import GameGrid from "./pages/GameGrid.svelte";
 
   let isLoading = true;
 
